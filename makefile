@@ -6,7 +6,7 @@ CC := i686-elf-gcc
 
 CFLAGS := -std=gnu99 -ffreestanding -O2 -Wall -Wextra \
           -Iinclude \
-          -Ikernel/include
+          -Ikernel/include \
 
 LDFLAGS := -T $(KERNEL_ARCH)/$(ARCH)/linker.ld \
            -nostdlib -ffreestanding
@@ -17,6 +17,8 @@ KERNEL_OBJS := \
 	$(KERNEL_ARCH)/$(ARCH)/boot.o \
 	$(KERNEL_ARCH)/$(ARCH)/tty.o \
 	$(KERNEL_ARCH)/$(ARCH)/gdt.o \
+	$(KERNEL_ARCH)/$(ARCH)/gdt_flush.o \
+	$(KERNEL_ARCH)/$(ARCH)/gdt_read_cpu.o \
 	kernel/kernel/kernel.o
 
 LIB_OBJS := \

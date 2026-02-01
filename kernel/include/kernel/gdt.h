@@ -29,9 +29,10 @@ typedef struct str_gdt_entry
   uint8_t Base2;
 } __attribute__((packed)) gdt_entry_t;
 
-void init_gdt();
+void init_gdt(void);
 
 extern gdt_entry_t gdt[];
 extern gdt_descriptor_t GDT_DESC;
+extern gdt_descriptor_t GDT_DESC_CPU;
 
 #endif // !__GDT_H__

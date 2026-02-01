@@ -1,6 +1,9 @@
-#include "gdt.h"
 #include "i386_defines.h"
+#include <kernel/gdt.h>
 #include <stdint.h>
+
+gdt_descriptor_t GDT_DESC;
+gdt_descriptor_t GDT_DESC_CPU;
 
 extern void gdt_flush(gdt_descriptor_t *);
 
