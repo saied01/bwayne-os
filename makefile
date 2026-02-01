@@ -6,19 +6,18 @@ CC := i686-elf-gcc
 
 CFLAGS := -std=gnu99 -ffreestanding -O2 -Wall -Wextra \
           -Iinclude \
-					-Ikernel/include
+          -Ikernel/include
 
 LDFLAGS := -T $(KERNEL_ARCH)/$(ARCH)/linker.ld \
            -nostdlib -ffreestanding
-
 
 TARGET := bwayneos
 
 KERNEL_OBJS := \
 	$(KERNEL_ARCH)/$(ARCH)/boot.o \
 	$(KERNEL_ARCH)/$(ARCH)/tty.o \
-	kernel/kernel/kernel.o \
-	# arch/$(ARCH)/gdt.o \
+	$(KERNEL_ARCH)/$(ARCH)/gdt.o \
+	kernel/kernel/kernel.o
 
 LIB_OBJS := \
 	lib/string/strlen.o
@@ -28,22 +27,18 @@ OBJS := $(KERNEL_OBJS) $(LIB_OBJS)
 all: $(TARGET)
 
 qemu: $(TARGET)
-	qemu-system-i386 -kernel $(TARGET)
+	qemu-system-i386 -kernel $(TARGET) -display gtk
 
 $(TARGET): $(OBJS)
 	$(CC) $(LDFLAGS) -o $@ $^
 
+# C → o
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(KERNEL_ARCH)/$(ARCH)/boot.o: $(KERNEL_ARCH)/$(ARCH)/boot.s
+# ASM → o
+%.o: %.s
 	$(AS) $< -o $@
-
-$(KERNEL_ARCH)/$(ARCH)/tty.o: $(KERNEL_ARCH)/$(ARCH)/tty.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-kernel/kernel/kernel.o: kernel/kernel/kernel.c
-	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(TARGET) $(OBJS)
