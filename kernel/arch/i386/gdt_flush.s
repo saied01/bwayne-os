@@ -2,6 +2,7 @@
 # [bits 32]
     .section .text
     .global gdt_flush
+    .global tss_flush
 
 gdt_flush:
     movl 4(%esp), %eax
@@ -19,3 +20,8 @@ gdt_flush:
 .flush:
 # return to gdt.c
     ret
+
+tss_flush:
+  movw $0x2B, %ax 
+  ltr %ax
+  ret

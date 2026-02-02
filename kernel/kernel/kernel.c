@@ -4,6 +4,7 @@
 void kernel_main(void)
 {
   gdt_init();
+  asm volatile("cli");
 
   terminal_initialize();
   terminal_writestring("gdt cargada piola \n");

@@ -7,6 +7,7 @@ CC := i686-elf-gcc
 CFLAGS := -std=gnu99 -ffreestanding -O2 -Wall -Wextra \
           -Iinclude \
           -Ikernel/include \
+					-Ilib/include
 
 LDFLAGS := -T $(KERNEL_ARCH)/$(ARCH)/linker.ld \
            -nostdlib -ffreestanding
@@ -22,7 +23,8 @@ KERNEL_OBJS := \
 	kernel/kernel/kernel.o
 
 LIB_OBJS := \
-	lib/string/strlen.o
+	lib/string/strlen.o \
+	lib/string/memset.o \
 
 OBJS := $(KERNEL_OBJS) $(LIB_OBJS)
 
