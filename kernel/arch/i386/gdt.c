@@ -84,12 +84,12 @@ void write_tss(uint32_t num, uint16_t ss0, uint32_t esp0)
 
 void set_gdt_entry(uint32_t idx, uint32_t base, uint32_t limit, uint8_t access, uint8_t flags)
 {
-  gdt[idx].Base0 = (base & 0xFFFF);
-  gdt[idx].Base1 = (base >> 16) & 0xFF;
-  gdt[idx].Base2 = (base >> 24) & 0xFF;
+  gdt[idx].Base0 = GDT_BASE_LOW(base);
+  gdt[idx].Base1 = GDT_BASE_MID(base);
+  gdt[idx].Base2 = GDT_BASE_HIGH(base);
 
-  gdt[idx].Limit0 = (limit & 0xFFFF);
-  gdt[idx].Flags = (limit >> 16) & 0x0F;
+  gdt[idx].Limit0 = GDT_LIMIT_HIGH(limit);
+  gdt[idx].Flags = GDT_LIMIT_LOW(limit);
   gdt[idx].Flags |= (flags & 0xF0);
 
   gdt[idx].AccessByte = access;

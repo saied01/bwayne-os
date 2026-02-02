@@ -26,4 +26,11 @@
 /* -------------------------------------------------------------------------- */
 #define GDT_OFF_NULL_DESC (GDT_IDX_NULL_DESC << 3)
 
+#define GDT_LIMIT_LOW(limit) (uint16_t)(((uint32_t)(limit)) & 0x0000FFFF)
+#define GDT_LIMIT_HIGH(limit) (uint8_t)((((uint32_t)(limit)) >> 16) & 0x0F)
+
+#define GDT_BASE_LOW(base) (uint16_t)(((uint32_t)(base)) & 0x0000FFFF)
+#define GDT_BASE_MID(base) (uint8_t)((((uint32_t)(base)) >> 16) & 0xFF)
+#define GDT_BASE_HIGH(base) (uint8_t)((((uint32_t)(base)) >> 24) & 0xFF)
+
 #endif // !__I386_DEFINES_H__
