@@ -19,7 +19,10 @@ KERNEL_OBJS := \
 	$(KERNEL_ARCH)/$(ARCH)/tty.o \
 	$(KERNEL_ARCH)/$(ARCH)/gdt.o \
 	$(KERNEL_ARCH)/$(ARCH)/gdt_flush.o \
+	$(KERNEL_ARCH)/$(ARCH)/idt.o \
+	$(KERNEL_ARCH)/$(ARCH)/idt_asm.o \
 	$(KERNEL_ARCH)/$(ARCH)/gdt_read_cpu.o \
+	$(KERNEL_ARCH)/$(ARCH)/io.o \
 	kernel/kernel/kernel.o
 
 LIB_OBJS := \

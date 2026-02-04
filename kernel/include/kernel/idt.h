@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+struct InterruptRegisters;
+
 typedef struct str_idt_descriptor
 {
   uint16_t idt_length;
@@ -22,8 +24,19 @@ extern idt_entry_t idt[];
 extern idt_descriptor_t IDT_DESC;
 
 void idt_init(void);
+extern void idt_flush(uint32_t);
 
 void isr_handler(struct InterruptRegisters *regs);
+void irq_handler(struct InterruptRegisters *regs);
+
+struct InterruptRegisters
+{
+  uint32_t cr2;
+  uint32_t ds;
+  uint32_t edi, esi, ebp, esp, ebx, edx, ecx, eax;
+  uint32_t int_num, err_code;
+  uint32_t eip, csm, eflags, useresp, ss;
+} __attribute__((__packed__));
 
 extern void isr0();
 extern void isr1();
@@ -58,8 +71,22 @@ extern void isr29();
 extern void isr30();
 extern void isr31();
 
-extern void isr32();
-extern void isr33();
+extern void irq0(void);
+extern void irq1(void);
+extern void irq2(void);
+extern void irq3(void);
+extern void irq4(void);
+extern void irq5(void);
+extern void irq6(void);
+extern void irq7(void);
+extern void irq8(void);
+extern void irq9(void);
+extern void irq10(void);
+extern void irq11(void);
+extern void irq12(void);
+extern void irq13(void);
+extern void irq14(void);
+extern void irq15(void);
 
 extern void isr88();
 extern void isr98();

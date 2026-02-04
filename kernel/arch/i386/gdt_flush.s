@@ -1,6 +1,6 @@
 # loading own gdt into memory
-# [bits 32]
     .section .text
+    .code32
     .global gdt_flush
     .global tss_flush
 

@@ -3,6 +3,6 @@
 
 #include <stdint.h>
 
-void outPortB(uint16_t, uint8_t);
+void outport_b(uint16_t, uint8_t);
 
 #endif // !__IO_H__
