@@ -1,5 +1,5 @@
-#ifndef __PIC_H__
-#define __PIC_H__
+#ifndef PIC_H
+#define PIC_H
 
 #include <stdint.h>
 #define PIC1 0x20 /* IO base address for master PIC */
@@ -16,4 +16,4 @@ void PIC_disable(void);
 void irq_set_mask(uint8_t);
 void irq_clear_mask(uint8_t);
 
-#endif // !__PIC_H__
+#endif // !PIC_H

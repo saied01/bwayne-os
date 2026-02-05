@@ -1,9 +1,9 @@
-#ifndef __IO_H__
-#define __IO_H__
+#ifndef I386_IO_H
+#define I386_IO_H
 
 #include <stdint.h>
 
 void outport_b(uint16_t, uint8_t);
 uint8_t inb(uint16_t);
 
-#endif // !__IO_H__
+#endif // !I386_IO_H

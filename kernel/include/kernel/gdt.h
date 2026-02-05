@@ -1,5 +1,5 @@
-#ifndef __GDT_H__
-#define __GDT_H__
+#ifndef __I386_GDT_H__
+#define __I386_GDT_H__
 
 #include <stdint.h>
 
@@ -71,4 +71,4 @@ extern gdt_entry_t gdt[];
 extern gdt_descriptor_t GDT_DESC;
 extern gdt_descriptor_t GDT_DESC_CPU;
 
-#endif // !__GDT_H__
+#endif // !__I386_GDT_H__

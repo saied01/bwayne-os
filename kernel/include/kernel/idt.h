@@ -1,5 +1,5 @@
-#ifndef __IDT_H__
-#define __IDT_H__
+#ifndef I386_IDT_H
+#define I386_IDT_H
 
 #include <stdint.h>
 
@@ -91,4 +91,4 @@ extern void irq15(void);
 extern void isr88();
 extern void isr98();
 
-#endif // !__IDT_H__
+#endif // !I386_IDT_H
