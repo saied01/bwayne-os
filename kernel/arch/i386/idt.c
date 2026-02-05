@@ -1,7 +1,8 @@
 #include "i386_defines.h"
-#include "io.h"
 #include <kernel/idt.h>
+#include <kernel/pic.h>
 #include <kernel/tty.h>
+#include <stdint.h>
 
 struct InterruptRegisters;
 
@@ -42,21 +43,6 @@ idt_descriptor_t IDT_DESC = {
 
 void idt_init(void)
 {
-  outport_b(0x20, 0x11);
-  outport_b(0xA0, 0x11);
-
-  outport_b(0x21, 0x20);
-  outport_b(0xA1, 0x28);
-
-  outport_b(0x21, 0x04);
-  outport_b(0xA1, 0x02);
-
-  outport_b(0x21, 0x01);
-  outport_b(0xA1, 0x01);
-
-  outport_b(0x21, 0x0);
-  outport_b(0xA1, 0x0);
-
   // Exceptions (0-31)
   IDT_ENTRY0(0);
   IDT_ENTRY0(1);
@@ -138,36 +124,4 @@ void isr_handler(struct InterruptRegisters *regs)
     for (;;)
       ;
   }
-}
-
-void *irq_routines[16] = {
-    0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0};
-
-void irq_install_handler(int irq, void (*handler)(struct InterruptRegisters *regs))
-{
-  irq_routines[irq] = handler;
-}
-
-void irq_uninstall_handler(int irq)
-{
-  irq_routines[irq] = 0;
-}
-
-void irq_handler(struct InterruptRegisters *regs)
-{
-  void (*handler)(struct InterruptRegisters *regs);
-  handler = irq_routines[regs->int_num - 32];
-
-  if (handler)
-  {
-    handler(regs);
-  }
-
-  if (regs->int_num >= 40)
-  {
-    outport_b(0xA0, 0x20);
-  }
-
-  outport_b(0x20, 0x20);
 }

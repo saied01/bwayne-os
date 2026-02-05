@@ -4,5 +4,6 @@
 #include <stdint.h>
 
 void outport_b(uint16_t, uint8_t);
+uint8_t inb(uint16_t);
 
 #endif // !__IO_H__
