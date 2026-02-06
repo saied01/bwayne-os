@@ -16,6 +16,8 @@ void kernel_main(void)
 
   // irq_clear_mask(1);
 
-  // for (;;)
-  //   asm volatile("hlt");
+  for (;;)
+  {
+    asm volatile("hlt");
+  }
 }

@@ -15,7 +15,7 @@ void pit_init(void)
   irq_install_handler(0, &on_irq0);
 
   // PIT oscillator runs at (roughly) 1.1931816666 MHz
-  uint32_t divisor = 1.1931820 / freq;
+  uint32_t divisor = 1193180 / freq;
 
   outport_b(PIT_CMD_CHN, 0x36);
   outport_b(PIT_CHN0, (uint8_t)(divisor & 0xFF));
@@ -25,6 +25,6 @@ void pit_init(void)
 void on_irq0(struct InterruptRegisters *regs)
 {
   (void)regs;
-  ticks++;
-  terminal_writestring("timer tick");
+  ticks += 1;
+  terminal_writestring("timer tick ");
 }

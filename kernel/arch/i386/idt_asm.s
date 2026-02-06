@@ -104,7 +104,7 @@ isr_common_stub:
   call isr_handler
 
   addl $8, %esp
-  popl %esp
+  popl %ebx
   movw %bx, %ds
   movw %bx, %es
   movw %bx, %fs
@@ -134,7 +134,7 @@ irq_common_stub:
   call irq_handler
 
   addl $8, %esp
-  popl %esp
+  popl %ebx
   movw %bx, %ds
   movw %bx, %es
   movw %bx, %fs
@@ -144,3 +144,4 @@ irq_common_stub:
   addl $8, %esp
   sti
   iret
+
