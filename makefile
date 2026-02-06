@@ -1,5 +1,6 @@
 ARCH := i386
 KERNEL_ARCH := kernel/arch
+DRIVERS := kernel/drivers
 
 AS := i686-elf-as
 CC := i686-elf-gcc
@@ -7,7 +8,8 @@ CC := i686-elf-gcc
 CFLAGS := -std=gnu99 -ffreestanding -O2 -Wall -Wextra \
           -Iinclude \
           -Ikernel/include \
-					-Ilib/include
+					-Ilib/include \
+					-Ikernel/arch
 
 LDFLAGS := -T $(KERNEL_ARCH)/$(ARCH)/linker.ld \
            -nostdlib -ffreestanding
@@ -18,21 +20,23 @@ KERNEL_OBJS := \
 	$(KERNEL_ARCH)/$(ARCH)/boot.o \
 	$(KERNEL_ARCH)/$(ARCH)/tty.o \
 	$(KERNEL_ARCH)/$(ARCH)/gdt.o \
-	$(KERNEL_ARCH)/$(ARCH)/pic.o \
 	$(KERNEL_ARCH)/$(ARCH)/gdt_flush.o \
 	$(KERNEL_ARCH)/$(ARCH)/idt.o \
 	$(KERNEL_ARCH)/$(ARCH)/idt_asm.o \
 	$(KERNEL_ARCH)/$(ARCH)/gdt_read_cpu.o \
 	$(KERNEL_ARCH)/$(ARCH)/io.o \
 	$(KERNEL_ARCH)/$(ARCH)/irq.o \
-	$(KERNEL_ARCH)/$(ARCH)/pit.o \
 	kernel/kernel/kernel.o
 
 LIB_OBJS := \
 	lib/string/strlen.o \
 	lib/string/memset.o \
 
-OBJS := $(KERNEL_OBJS) $(LIB_OBJS)
+DRIVER_OBJS := \
+	$(DRIVERS)/timer/pit.o \
+	$(DRIVERS)/pic/pic.o \
+
+OBJS := $(KERNEL_OBJS) $(LIB_OBJS) $(DRIVER_OBJS)
 
 all: $(TARGET)
 
