@@ -9,7 +9,8 @@ CFLAGS := -std=gnu99 -ffreestanding -O2 -Wall -Wextra \
           -Iinclude \
           -Ikernel/include \
 					-Ilib/include \
-					-Ikernel/arch
+					-Ikernel/arch/i386 \
+					-D__is_libk  \
 
 LDFLAGS := -T $(KERNEL_ARCH)/$(ARCH)/linker.ld \
            -nostdlib -ffreestanding
@@ -31,6 +32,9 @@ KERNEL_OBJS := \
 LIB_OBJS := \
 	lib/string/strlen.o \
 	lib/string/memset.o \
+	lib/stdio/printf.o \
+	lib/stdio/putchar.o \
+	lib/stdio/itoa.o \
 
 DRIVER_OBJS := \
 	$(DRIVERS)/timer/pit.o \

@@ -1,4 +1,4 @@
-#include <i386/io.h>
+#include <io.h>
 #include <kernel/idt.h>
 #include <kernel/irq.h>
 #include <kernel/pit.h>

@@ -1,4 +1,4 @@
-#include <i386/io.h>
+#include <io.h>
 #include <kernel/pic.h>
 #include <stdint.h>
 
