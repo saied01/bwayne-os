@@ -9,8 +9,9 @@ CFLAGS := -std=gnu99 -ffreestanding -O2 -Wall -Wextra \
           -Iinclude \
           -Ikernel/include \
 					-Ilib/include \
+					-Ikernel/drivers \
 					-Ikernel/arch/i386 \
-					-D__is_libk  \
+					-D__is_libk  
 
 LDFLAGS := -T $(KERNEL_ARCH)/$(ARCH)/linker.ld \
            -nostdlib -ffreestanding
@@ -39,6 +40,7 @@ LIB_OBJS := \
 DRIVER_OBJS := \
 	$(DRIVERS)/timer/pit.o \
 	$(DRIVERS)/pic/pic.o \
+	$(DRIVERS)/keyboard/keyboard.o \
 
 OBJS := $(KERNEL_OBJS) $(LIB_OBJS) $(DRIVER_OBJS)
 

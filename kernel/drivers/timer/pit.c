@@ -26,5 +26,4 @@ void on_irq0(struct InterruptRegisters *regs)
 {
   (void)regs;
   ticks += 1;
-  terminal_writestring("timer tick ");
 }

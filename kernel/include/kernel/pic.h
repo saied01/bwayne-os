@@ -10,6 +10,7 @@
 #define PIC2_DATA (PIC2 + 1)
 #define PIC_EOI 0x20
 
+void pic_init(void);
 void pic_remap(uint8_t, uint8_t);
 void pic_send_eoi(uint8_t);
 void PIC_disable(void);
