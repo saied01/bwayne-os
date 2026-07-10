@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include <kernel/tty.h>
+#include <io.h>
 
 #include "vga.h"
 

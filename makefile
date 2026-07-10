@@ -5,7 +5,7 @@ DRIVERS := kernel/drivers
 AS := i686-elf-as
 CC := i686-elf-gcc
 
-CFLAGS := -std=gnu99 -ffreestanding -O2 -Wall -Wextra \
+CFLAGS := -std=gnu99 -ffreestanding -O2 -Wall -Wextra -Wa,--32 \
           -Iinclude \
           -Ikernel/include \
 					-Ilib/include \
@@ -14,7 +14,8 @@ CFLAGS := -std=gnu99 -ffreestanding -O2 -Wall -Wextra \
 					-D__is_libk  
 
 LDFLAGS := -T $(KERNEL_ARCH)/$(ARCH)/linker.ld \
-           -nostdlib -ffreestanding
+           -nostdlib -ffreestanding \
+           -B/usr/bin -Wl,-m,elf_i386
 
 TARGET := bwayneos
 
@@ -58,7 +59,7 @@ $(TARGET): $(OBJS)
 
 # ASM → o
 %.o: %.s
-	$(AS) $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(TARGET) $(OBJS)
